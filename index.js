@@ -34,6 +34,7 @@ async function getDataFromAPI(myArr) {
     const indexOfLastPage = currentPage * itemsPerPage;
     const indexOfFirstPage = (currentPage - 1) * itemsPerPage;
     const currentItems = myArr.slice(indexOfFirstPage, indexOfLastPage);
+    const Capitalize = str => {return `${str.slice(0, 1).toUpperCase()}${str.slice(1).toLowerCase()}`};
 
     await Promise.all(currentItems.map(async (item) => {
         let {name, url} = item
@@ -44,7 +45,7 @@ async function getDataFromAPI(myArr) {
                 <a href= ${`details.html?=${name}`}>
                     <div class="child-item">
                         <img src=${front_shiny} />
-                        <h3>${name}</h3>
+                        <h3>${Capitalize(name)}</h3>
                     </div>
                 </a>
             </div>
