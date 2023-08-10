@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Handjet&family=Inconsolata&display=swap');
+
+:root {
+    --primary : #005000;
+    --alphaPrimary : #00500033;
+    --bg-color : #ffcd83;
+    --bg-item : #fff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 20px;
+    background-color: var(--bg-color);
+    font-family: 'Inconsolata', monospace;
+}
+
+.header {
+    padding: 20px;
+    margin: 10px;
+}
+
+.header h1, .header p {
+    text-align: center;
+    color: var(--primary);
+}
+
+.form-input {
+    width: 85%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--alphaPrimary);
+    margin: 0 0 7% 5%;
+}
+
+.mainDiv {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 30px;
+}
+
+
+.item-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--alphaPrimary);
+    box-shadow: 2px 2px 2px 1px var(--alphaPrimary);
+    width: 250px;
+    background-color: var(--bg-item);
+}
+
+.child-item > h3 {
+    color: var(--primary);
+}
+
+.item-div a {
+    text-decoration: none;
+    color: #000;
+}
+
+.btn-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5%;
+    gap: 10px;
+}
+
+.btn-div > button {
+    padding: 12px;
+    border: none;
+    font-weight: bold;
+}
+
+.btn-div > button:first-child {
+    background-color: red;
+    color: #fff;
+}
+
+.btn-div > button:last-child {
+    background-color: var(--primary);
+    color: #fff;
+}
+
+.loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: lightgrey;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.disppear{
+    animation: vanish 1s forwards;
+}
+
+@keyframes vanish {
+    100%{
+      opacity: 0;
+      visibility: hidden;
+    }
+}
