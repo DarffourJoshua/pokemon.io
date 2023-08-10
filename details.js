@@ -6,7 +6,7 @@ const BaseStat = document.getElementById("baseStat");
 const Types = document.querySelector("#types");
 const Weight = document.querySelector("#weight");
 const Moves = document.querySelector("#moves");
-
+ const Capitalize = str => {return `${str.slice(0, 1).toUpperCase()}${str.slice(1).toLowerCase()}`};
 
 async function getPokemonDetails(api) {
     let userWindow = window.location.search.slice(1).split('=')[1];
@@ -15,8 +15,6 @@ async function getPokemonDetails(api) {
     
     let res = await fetch(oneURL);
     let data = await res.json();
-
-    const Capitalize = str => {return `${str.slice(0, 1).toUpperCase()}${str.slice(1).toLowerCase()}`};
     
     let {sprites : {front_shiny}, forms: [{name}]} = data;
     let pName = Capitalize(name);
@@ -42,7 +40,7 @@ async function getPokemonDetails(api) {
    let pokemonTypes = data.types;
    pokemonTypes.forEach(element => {
     let {type : {name}} = element
-    Types.innerHTML += `<span class="typeElement">${name}</span>`
+    Types.innerHTML += `<span class="typeElement">${Capitalize(name)}</span>`
    });
 
    //pokemon's weight
@@ -54,7 +52,7 @@ async function getPokemonDetails(api) {
     let {move : {name}} = element
         Moves.innerHTML +=
         `
-            <span class="movesSpan">${name}</span>
+            <span class="movesSpan">${Capitalize(name)}</span>
         `
    })
 }
