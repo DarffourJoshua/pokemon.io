@@ -16,11 +16,11 @@ async function getPokemonDetails(api) {
     let res = await fetch(oneURL);
     let data = await res.json();
 
-    const Capitalize = str => {return str.chatAt(0).toUpperCase() + str.slice(1).toLowerCase()}
+    const Capitalize = str => {return `${str.slice(0, 1).toUpperCase()}${str.slice(1).toLowerCase()}`};
     
     let {sprites : {front_shiny}, forms: [{name}]} = data;
     let pName = Capitalize(name);
-    console.log(name);
+   
     PokemonImg.src = front_shiny; //pokemon's Image
     PokemonName.textContent = pName; //pokemon's name
     Species.textContent = pName;  // pokemon's species
