@@ -6,7 +6,7 @@ const BaseStat = document.getElementById("baseStat");
 const Types = document.querySelector("#types");
 const Weight = document.querySelector("#weight");
 const Moves = document.querySelector("#moves");
- const Capitalize = str => {return `${str.slice(0, 1).toUpperCase()}${str.slice(1).toLowerCase()}`};
+ const Capitalize = str => {return `${str.slice(0, 1).toUpperCase()}${str.slice(1).toLowerCase()}`}; //Capitalize function
 
 async function getPokemonDetails(api) {
     let userWindow = window.location.search.slice(1).split('=')[1];
