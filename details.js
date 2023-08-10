@@ -22,8 +22,8 @@ async function getPokemonDetails(api) {
     let pName = Capitalize(name);
     console.log(name);
     PokemonImg.src = front_shiny; //pokemon's Image
-    PokemonName.textContent = name; //pokemon's name
-    Species.textContent = name;  // pokemon's species
+    PokemonName.textContent = pName; //pokemon's name
+    Species.textContent = pName;  // pokemon's species
 
     //Pokemon's Base Stats
    let specs = data.stats;
