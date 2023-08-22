@@ -1,46 +1,59 @@
 //let proxyURL = " https://cors-anywhere.herokuapp.com"
-let localAPI = "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0";
+let localAPI = 'https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0';
 //let localAPI = `${proxyURL}/${baseURL}`
-const mainContainer = document.getElementById("mainDiv");
-const PrevBtn = document.querySelector("#prev");
-const NextBtn = document.querySelector("#next");
-const Loader = document.querySelector(".loader");
-const searchBar = document.querySelector("#searchBar");
+const mainContainer = document.getElementById('mainDiv');
+const PrevBtn = document.querySelector('#prev');
+const NextBtn = document.querySelector('#next');
+const Loader = document.querySelector('.loader');
+const searchBar = document.querySelector('#searchBar');
 let storeAPI = [];
 let itemsPerPage = 16;
 let currentPage = 1;
 
-const showLoader = () => Loader.classList.add("dispaly");
-const hideLoader = () => Loader.classList.remove("display");
+const showLoader = () => Loader.classList.add('dispaly');
+const hideLoader = () => Loader.classList.remove('display');
 
-searchBar.addEventListener('keyup', (e) => {
-    const searchString = e.target.value.toLowerCase();
+// use event listener 'input' to track changes of the search input
+searchBar.addEventListener('input', (e) => {
+  const searchText = searchBar.value;
+  // only search if the letters are more than 2
+  if (searchText.length > 2) {
+    const searchString = searchText.toLowerCase();
     const filteredCharacters = storeAPI.filter((character) => {
-        return (character.name.toLowerCase().includes(searchString))
+      return character.name.toLowerCase().includes(searchString);
     });
     getDataFromAPI(filteredCharacters);
+  }
+  // make sure to return all the characters when the letters are less than 3
+  else {
+    getDataFromAPI(storeAPI);
+  }
 });
 
-
-/** 
+/**
  * Function for manipulating the data from the API
  * Also the algorithm of the pagination
- * */ 
+ * */
 async function getDataFromAPI(myArr) {
-    //await getAPI(localAPI);
-    //console.log(storeAPI);
-    let divEle = "";
+  //await getAPI(localAPI);
+  //console.log(storeAPI);
+  let divEle = '';
 
-    const indexOfLastPage = currentPage * itemsPerPage;
-    const indexOfFirstPage = (currentPage - 1) * itemsPerPage;
-    const currentItems = myArr.slice(indexOfFirstPage, indexOfLastPage);
-    const Capitalize = str => {return `${str.slice(0, 1).toUpperCase()}${str.slice(1).toLowerCase()}`};
+  const indexOfLastPage = currentPage * itemsPerPage;
+  const indexOfFirstPage = (currentPage - 1) * itemsPerPage;
+  const currentItems = myArr.slice(indexOfFirstPage, indexOfLastPage);
+  const Capitalize = (str) => {
+    return `${str.slice(0, 1).toUpperCase()}${str.slice(1).toLowerCase()}`;
+  };
 
-    await Promise.all(currentItems.map(async (item) => {
-        let {name, url} = item
-        let fetchedData = await(await fetch(url)).json();
-        let {sprites : {front_shiny}} = fetchedData;
-        divEle += `
+  await Promise.all(
+    currentItems.map(async (item) => {
+      let { name, url } = item;
+      let fetchedData = await (await fetch(url)).json();
+      let {
+        sprites: { front_shiny },
+      } = fetchedData;
+      divEle += `
             <div class="item-div">
                 <a href= ${`details.html?=${name}`}>
                     <div class="child-item">
@@ -49,49 +62,48 @@ async function getDataFromAPI(myArr) {
                     </div>
                 </a>
             </div>
-        `
-    }))
-    mainContainer.innerHTML = divEle;
+        `;
+    })
+  );
+  mainContainer.innerHTML = divEle;
 }
-
-
 
 // Function for fetching data from the Pokemon's API
 async function getAPI(api) {
-    try{
-        showLoader();
-        let res = await fetch(api);
-        let data = await res.json();
-        storeAPI = data.results
-        hideLoader();
-        getDataFromAPI(storeAPI);
-    }   catch(err) {
-        alert(err);
-    }
+  try {
+    showLoader();
+    let res = await fetch(api);
+    let data = await res.json();
+    storeAPI = data.results;
+    hideLoader();
+    getDataFromAPI(storeAPI);
+  } catch (err) {
+    alert(err);
+  }
 }
 
 getAPI(localAPI);
 
 // Next page button for pagination
 const prevPage = () => {
-    if (currentPage > 1) {
-        currentPage--;
-        showLoader();
-        getDataFromAPI(storeAPI);
-    }
-}
+  if (currentPage > 1) {
+    currentPage--;
+    showLoader();
+    getDataFromAPI(storeAPI);
+  }
+};
 
 // Previous page button for pagination
 const nextPage = () => {
-    if ((currentPage * itemsPerPage) < storeAPI.length) {
-        currentPage++;
-        showLoader();
-        getDataFromAPI(storeAPI);
-    }
-}
+  if (currentPage * itemsPerPage < storeAPI.length) {
+    currentPage++;
+    showLoader();
+    getDataFromAPI(storeAPI);
+  }
+};
 
-PrevBtn.addEventListener("click",prevPage, false);
+PrevBtn.addEventListener('click', prevPage, false);
 
-NextBtn.addEventListener("click",nextPage, false);
+NextBtn.addEventListener('click', nextPage, false);
 
 //searchBar.addEventListener("input", searchFunction);

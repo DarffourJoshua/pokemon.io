@@ -1,35 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>All Pokemons</title>
-</head>
-<body>
+  </head>
+  <body>
     <div class="header">
-        <h1>Pokédex</h1>
-        <p>The Pokédex contains detailed stats for every creature from the Pokemon games.</p>
+      <h1>Pokédex</h1>
+      <p>
+        The Pokédex contains detailed stats for every creature from the Pokemon
+        games.
+      </p>
     </div>
     <div>
-        <input 
-            type="text" 
-            name="searchBar"
-            class="form-input"
-            id="searchBar" 
-            placeholder="Search for Pokemons" 
-        />
+      <input
+        type="search"
+        name="searchBar"
+        class="form-input"
+        id="searchBar"
+        placeholder="Search for Pokemons"
+      />
     </div>
-    
+
     <div id="mainDiv" class="mainDiv">
-        <div class="loader">
-            <img src="load-gif.gif" alt="loader" />
-        </div>
+      <div class="loader">
+        <img src="load-gif.gif" alt="loader" />
+      </div>
     </div>
     <div class="btn-div">
-        <button id="prev"> Previous </button>
-        <button id = "next" >Next</button>
+      <button id="prev">Previous</button>
+      <button id="next">Next</button>
     </div>
     <script src="index.js"></script>
-</body>
+  </body>
 </html>
